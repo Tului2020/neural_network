@@ -1,4 +1,4 @@
-# import pprint
+import pprint
 import numpy as np
 
 # ReLU
@@ -37,32 +37,34 @@ class Layer_Dense:
     return mapReLU(np.dot(self.weights, inputs) + self.biases)
 
 # Space Creation
-# x = np.round(np.linspace(0, 1, 41), 2)
-_x = [1]
+x = np.round(np.linspace(0, 1, 41), 2)
+aL = []
+for _x in x:
+  _x = [_x]
+  # Layer 1
+  layer1 = Layer_Dense(
+    [[w_1_s_1], [w_1_s_2]],
+    [b_1_1, b_1_2],
+  )
+  a1 = layer1.forward(_x)
 
-# Layer 1
-layer1 = Layer_Dense(
-  [[w_1_s_1], [w_1_s_2]],
-  [b_1_1, b_1_2],
-)
-a1 = layer1.forward(_x)
+  # Layer 2
+  layer2 = Layer_Dense(
+    [
+      [w_2_1_1, w_2_1_2],
+      [w_2_2_1, w_2_2_2],
+    ],
+    [b_2_1, b_2_2],
+  )
+  a2 = layer2.forward(a1)
 
-# Layer 2
-layer2 = Layer_Dense(
-  [
-    [w_2_1_1, w_2_1_2],
-    [w_2_2_1, w_2_2_2],
-  ],
-  [b_2_1, b_2_2],
-)
-a2 = layer2.forward(a1)
+  # Layer 3
+  layer3 = Layer_Dense(
+    [[w_L_1_L, w_L_2_L]],
+    [b_L],
+  )
+  aL.append(np.round(layer3.forward(a2)[0], 2))
 
-# Layer 3
-layer3 = Layer_Dense(
-  [[w_L_1_L, w_L_2_L]],
-  [b_L],
-)
-aL = layer3.forward(a2)
-print(aL)
-
+for item in zip(x, aL):
+  print(item)
 
