@@ -4,8 +4,28 @@ import numpy as np
 # ReLU
 def ReLU(x):
   return 0 if x < 0 else x
-
 mapReLU = np.vectorize(ReLU)
+
+# naming convention = [WEIGHT]_[LAYER_NUMBER]_[STARTING_NODE_NUMBER]_[ENDING_NODE_NUMBER]
+# naming convention = [BIASE]_[LAYER_NUMBER]_[NODE_NUMBER]
+w_1_s_1 = 1
+w_1_s_2 = 0
+
+w_2_1_1 = 1
+w_2_1_2 = 0
+w_2_2_1 = 0
+w_2_2_2 = 0
+
+w_L_1_L = 1
+w_L_2_L = 0
+
+b_1_1 = 1
+b_1_2 = 0
+
+b_2_1 = 1
+b_2_2 = 0
+
+b_L = 1
 
 # Layer
 class Layer_Dense:
@@ -22,27 +42,25 @@ _x = [1]
 
 # Layer 1
 layer1 = Layer_Dense(
-  [[1], [0]],
-  [1, 0],
+  [[w_1_s_1], [w_1_s_2]],
+  [b_1_1, b_1_2],
 )
 a1 = layer1.forward(_x)
-print(a1)
 
 # Layer 2
 layer2 = Layer_Dense(
   [
-    [1, 0], 
-    [0, 1],
+    [w_2_1_1, w_2_1_2],
+    [w_2_2_1, w_2_2_2],
   ],
-  [1, 0],
+  [b_2_1, b_2_2],
 )
 a2 = layer2.forward(a1)
-print(len(a2))
 
 # Layer 3
 layer3 = Layer_Dense(
-  [[1, 0]],
-  [1],
+  [[w_L_1_L, w_L_2_L]],
+  [b_L],
 )
 aL = layer3.forward(a2)
 print(aL)
