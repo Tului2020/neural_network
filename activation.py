@@ -1,4 +1,4 @@
-import pprint
+import matplotlib.pyplot as plt
 import numpy as np
 
 # ReLU
@@ -8,24 +8,21 @@ mapReLU = np.vectorize(ReLU)
 
 # naming convention = [WEIGHT]_[LAYER_NUMBER]_[STARTING_NODE_NUMBER]_[ENDING_NODE_NUMBER]
 # naming convention = [BIASE]_[LAYER_NUMBER]_[NODE_NUMBER]
-w_1_s_1 = 1
+w_1_s_1 = 6
 w_1_s_2 = 0
+b_1_1 = 0
+b_1_2 = 0
 
-w_2_1_1 = 1
+w_2_1_1 = -1
 w_2_1_2 = 0
 w_2_2_1 = 0
 w_2_2_2 = 0
-
-w_L_1_L = 1
-w_L_2_L = 0
-
-b_1_1 = 1
-b_1_2 = 0
-
-b_2_1 = 1
+b_2_1 = -0.7
 b_2_2 = 0
 
-b_L = 1
+w_L_1_L = -1
+w_L_2_L = 0
+b_L = 0
 
 # Layer
 class Layer_Dense:
@@ -65,6 +62,5 @@ for _x in x:
   )
   aL.append(np.round(layer3.forward(a2)[0], 2))
 
-for item in zip(x, aL):
-  print(item)
-
+plt.plot(x, aL)
+plt.show()
